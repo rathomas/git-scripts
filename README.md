@@ -2,6 +2,10 @@
 
 A set of Git scripts for accelerating common tasks.  
 
+1. checkout scripts into ~/scripts.
+2. add aliases to your .bashrc or .bash_profile
+3. source ~/.bashrc
+
 #Sample .bash_profile:
 ```sh
 # Include .bashrc
