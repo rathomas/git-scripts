@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 #
 # git_fix.sh - script for pushing a branch
 #
@@ -6,16 +6,10 @@
 source .git_config
 echo $APP_MSG
 
-if [ $# -eq 0 ]; then
-    echo "Missing options!”
-    echo "(run $0 -h for help)"
-    echo ""
-    exit 0
-fi
+source .git_help
 
-ECHO="false”
 
-while getopts “hb” OPTION; do
+while getopts "hb" OPTION; do
     case $OPTION in
 
         b)
@@ -24,8 +18,8 @@ while getopts “hb” OPTION; do
             ;;
         h)
             echo "Usage:"
-            echo "git_fix.sh -h "
-            echo "git_fix.sh -b "
+            echo "$0 -b "
+            echo "$0 -h "
             echo ""
             echo "  -b  branch to push"
             echo "  -h  help (this output)"
@@ -41,6 +35,6 @@ if [ "$BRANCH"™ = “true” ]; then
     echo "$APP_OUT FETCH"
     git fetch
 
-    echo "$APP_OUT MERGE”
+    echo "$APP_OUT MERGE"
     git pull origin $SPRINT_WORKING_BRANCH 2>&1
 fi

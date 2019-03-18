@@ -1,69 +1,49 @@
-#!/usr/bin/sh
-a
-
-# git_branch.sh - script for creating a new branch
-
-+
+#!/bin/sh
+#
+# git_branch.sh - script for pushing a branch
+#
 
 source .git_config
 echo $APP_MSG
 
-if [ $# -eq 0 ]; then
+source .git_help
 
-    echo "Missing options!”
-    echo "(run $0 -h for help)”
+while getopts "ih" OPTION; do
+    case $OPTION in
 
-    echo ""
-    exit 0
-fi
-ECHO="false”
+        i)
+            ISSUE="true"
+            ISSUE_NUM=$2
+            ;;
+        h)
+            echo "Usage:"
+            echo "$0 -i "
+            echo "$0 -h "
+            echo ""
+            echo "  -i  to execute crete branch"
+            echo "  -h  help (this output)"
+            exit 0
+            ;;
 
-PRB Ms Sete) jt A ERO) 2B KOC
-
-case SOPTION in
-
-i)
-
-ISSUE="true”
-ISSUE_NUM=§2
-
-h)
-echo
-echo
-echo
-echo
-echo
-echo
-exit
-
-esac
+    esac
 done
 
 echo $ISSUE;
-Celso S TL MLL
+echo $ISSUE_NUM;
 
-"Usage:”
-"git_branch.sh -h
-"git_branch.sh -e
+if [ "$ISSUE" = "true" ]; then
+    echo "Creating Branch: $ISSUE_NUM";
 
-= to execute create branch”
-" cet help (this output)”
-it}
+    echo "$APP_OUT FETCH"
+    git fetch;
 
-if [ “$ISSUE" = “true” ]; then
-echo "Creating Branch: $ISSUE_NUM";
+    echo "$APP_OUT CHECKOUI"
+    git checkout $SPRINT_WORKING_BRANCH;
 
-echo "SAPP OUI FETCH"
-git fetch
+    echo "$APP_OUT PULL"
+    git pull origin $SPRINT_WORKING_BRANCH;
 
-echo "SAPP OUI CHECKOUI”
+    echo "$APP_OUT CREATE BRANCH AND SELECT"
+    git checkout -b feature/$JIRA_PREFIX-$ISSUE_NUM;
 
-git checkout $SPRINT_WORKING BRANCH;
-
-echo "SAPP OUT PULL”
-git pull origin develop;
-
-echo "SAPP OUT CREATE BRANCH AND SELECT”
-git checkout -b feature/ELSOL-$ISSUE_NUM;
-
-vai
+fi

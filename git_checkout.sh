@@ -1,53 +1,63 @@
 #!/bin/sh
+#
+# git_checkout.sh - script for pushing a branch
+#
 
-while getopts "hin" OPTION; do
-case $OPTION in
+source .git_config
+echo $APP_MSG
 
-i)
-ISSUE="true”
-ISSUE_NUM=§2
-n)
-ISSUE="true”
-BRANCH_NAME=$2
-h)
+source .git_help
 
-echo "Usage:”
-echo “git_checkout.sh [-i id | -n name]
+while getopts "inh" OPTION; do
+    case $OPTION in
 
-echo ""
+        i)
+            ISSUE="true"
+            ISSUE_NUM=$2
+            ;;
+        n)
+            ISSUE="true"
+            BRANCH_NAME=$2
+            ;;
+        h)
+            echo "Usage:"
+            echo "$0 -i "
+            echo "$0 -n "
+            echo "$0 -h "
+            echo ""
+            echo "  -i  checkout branch by JIRA id"
+            echo "  -n  checkout branch by name"
+            echo "  -h  help (this output)"
+            exit 0
+            ;;
 
-echo ” -i to checkout branch by JIRA id”
-echo ” coe to checkout branch by branch name”
-echo ” cet help (this output)”
-
-exit 0
-
-esac
+    esac
 done
 
 echo $ISSUE;
-Cree RU Le
+echo $ISSUE_NUM;
 
-if [ “$ISSUE" = “true” ]; then
-echo "Checking But Branch: $ISSUE_NUM";
+if [ "$ISSUE" = "true" ]; then
+    echo "Checking But Branch: $ISSUE_NUM";
 
-echo "SAPP OUI FETCH"
-git fetch
+    echo "$APP_OUT FETCH"
+    git fetch
 
-echo "SAPP OUT STASH"
-git stash
+    echo "$APP_OUT STASH"
+    git stash
 
-if [ -n "$ISSUE_NUM" ]; then
-echo "SAPP OUI CHECKOUT BRANCH”
-git checkout feature/ELSOL-$ISSUE_NUM;
+    if [ -n "$ISSUE_NUM" ]; then
+        echo "$APP_OUT CHECKOUT BRANCH”
+        git checkout feature/$JIRA_PREFIX-$ISSUE_NUM;
 
-echo "SAPP OUT PULL”
-git pull origin feature/ELSOL-$ISSUE_NUM;
+        echo "SAPP OUT PULL"
+        git pull origin feature/$JIRA_PREFIX-$ISSUE_NUM;
 
-elif [ -n "$BRANCH NAME” ]; then
-echo "SAPP OUI CHECKOUT BRANCH”
-git checkout $BRANCH_NAME;
+    elif [ -n "$BRANCH_NAME" ]; then
+        echo "$APP_OUT CHECKOUT BRANCH"
+        git checkout $BRANCH_NAME;
 
-echo "SAPP OUI PULL”
-git pull origin $BRANCH_NAME;
+        echo "$APP_OUT PULL"
+        git pull origin $BRANCH_NAME;
+    fi
 fi

@@ -1,0 +1,9 @@
+
+if [ $# -eq 0 ]; then
+    echo "Missing options!"
+    echo "(run $0 -h for help)"
+    echo ""
+    exit 0
+fi
+
+ECHO="false"
